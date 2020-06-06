@@ -40,8 +40,8 @@ app.get("/", function(req, res) {
     res.send(index.html);
 });
 
-
-app.listen(3000, function() {
+var PORT = process.env.PORT || 3000;
+app.listen(PORT, function() {
     console.log("Listening on port %s. http://localhost:3000 ");
 });
 
