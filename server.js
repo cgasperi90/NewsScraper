@@ -29,6 +29,8 @@ var databaseURL = "newsscraperdb";
 var collections = ["news"];
 
 var db = mongoJs(databaseURL, collections);
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.connect(MONGODB_URI);
 
 db.on("error", function(error) {
     console.log("Database Error:", error);
