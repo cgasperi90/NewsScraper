@@ -23,7 +23,7 @@ app.engine(
   );
 app.set("view engine", "handlebars");
   
-require("./routes/htmlRoutes")(app);
+require("./routes/htmlRoutes.js")(app);
 
 var databaseURL = "newsscraperdb";
 var collections = ["news"];
@@ -46,3 +46,4 @@ app.listen(PORT, function() {
 });
 
 module.exports = app;
+module.exports = db;
