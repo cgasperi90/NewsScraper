@@ -35,6 +35,7 @@ module.exports = function(app) {
     });
 
     app.get("/scrape", function(req, res) {
+        console.log("hi");
         axios.get("https://news.yahoo.com/").then(function(response) {
             var $ = cheerio.load(response.data);
 
