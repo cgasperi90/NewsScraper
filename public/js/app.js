@@ -7,7 +7,7 @@ function getNews() {
     $.getJSON("/all", function(data) {
         console.log(data);
         for (var i = 0; i < data.length; i++) {
-            $("#articlesGoHere").prepend("<div class='card' data-id=" + data[i]._id + "><div class='card-header'><h4><a class='data-title' target=_blank href='https://news.yahoo.com/" + data[i].link + "' data-id=" + data[i]._id + ">" + data[i].title + "</a><a class='btn btn-primary btn-success save-btn'>Save Article</a></h4></div></div>");
+            $("#articlesGoHere").prepend("<div class='card' data-id=" + data[i]._id + "><div class='card-header'><h4><a class='data-title' target=_blank href='https://espn.com/" + data[i].link + "'>" + data[i].title + "</a><button class='btn btn-primary btn-success save-btn'>Save Article</button></h4></div><div class='card-body'>" + data[i].text + "</div></div>");
         }
     });
 };
@@ -28,17 +28,11 @@ $("#scrape").on("click", function() {
         }
     });
     //location.reload();
-    setTimeout(getNews, 3000);
+    setTimeout(getNews, 1000);
 
 });
 
-function getResults() {
-    $.getJSON("/all", function(data) {
-        for (var i = 0; i < data.length; i++) {
-            $("#articleGoHere").prepend()
-        }
-    })
-}
+
 $("#clear").on("click", function() {
     //event.preventDefault();
     $.ajax({

@@ -36,18 +36,19 @@ module.exports = function(app) {
 
     app.get("/scrape", function(req, res) {
         console.log("hi");
-        axios.get("https://news.yahoo.com/").then(function(response) {
+        axios.get("https://espn.com/fantasy/football").then(function(response) {
             var $ = cheerio.load(response.data);
 
-            $("h3").each(function(i, element) {
-                var title = $(element).children("a").text();
+            $("section").each(function(i, element) {
+                var title = $(element).find("a").find("div").find("div").children("h1").text();
                 var link = $(element).children("a").attr("href");
-                var text = $(element).children("p").text();
+                var text = $(element).find("a").find("div").find("div").children("p").text();
 
-                if (title && link) {
+                if (title && link && text) {
                     db.news.insert({
                         title: title,
-                        link: link
+                        link: link,
+                        text: text
                     }, function(err, inserted) {
                         if (err) {
                             console.log(err);
