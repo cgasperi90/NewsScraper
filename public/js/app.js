@@ -1,4 +1,3 @@
-console.log("everything works");
 
 function getNews() {
     console.log("function works")
@@ -7,8 +6,24 @@ function getNews() {
     $.getJSON("/all", function(data) {
 
         for (var i = 0; i < data.length; i++) {
-            $("#articlesGoHere").prepend("<div class='card' data-id=" + data[i]._id + "><div class='card-header'><h4><a class='data-title' target=_blank href='https://espn.com/" + data[i].link + "'>" + data[i].title + "</a><button class='btn btn-primary btn-success save-btn'>Save Article</button></h4></div><div class='card-body'>" + data[i].text + "</div></div>");
+            $("#articlesGoHere").prepend("<div class='card' data-id=" + data[i]._id + "><div class='card-header'><h4><a class='data-title' target=_blank href='https://espn.com/" + data[i].link + "'>" + data[i].title + "</a><button class='btn btn-primary btn-success save-btn' data-title='" + data[i].title + "' data-link='" + data[i].link + "' data-text='" + data[i].text + "'>Save Article</button></h4></div><div class='card-body'>" + data[i].text + "</div></div>");
         }
+
+        $(".save-btn").on("click", function() {
+            console.log("button works")
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/save",
+                data: {
+                    title: $(this).data("title"),
+                    link: $(this).data("link"),
+                    text: $(this).data("text")
+                }
+            }).then(function() {
+                console.log("Saved");
+            });
+        })
     });
 };
 
@@ -20,15 +35,14 @@ $("#scrape").on("click", function() {
     console.log("click")
     $.ajax({
         type: "GET",
-        dataType: "json",
-        url: "/scrape",
-        success: getNews(),
-        error: function() {
-            console.log("error");
-        }
+        url: "/scrape"
+    }).then(function() {
+        console.log("test")
+        getNews();
+
     });
     //location.reload();
-    setTimeout(getNews, 2000);
+    //setTimeout(getNews, 2000);
 
 });
 
@@ -47,12 +61,4 @@ $("#clear").on("click", function() {
 });
 
 
-//AJAX call for saving an article
-$(".save-btn").on("click", function() {
-    console.log("button works")
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "/savearticle",
-    });
-})
+// AJAX call for saving an article
