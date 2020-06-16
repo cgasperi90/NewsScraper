@@ -22,6 +22,7 @@ function getNews() {
                 }
             }).then(function() {
                 console.log("Saved");
+                alert("Saved!");
             });
         })
     });
@@ -41,8 +42,6 @@ $("#scrape").on("click", function() {
         getNews();
 
     });
-    //location.reload();
-    //setTimeout(getNews, 2000);
 
 });
 
@@ -60,5 +59,3 @@ $("#clear").on("click", function() {
     location.reload();
 });
 
-
-// AJAX call for saving an article

@@ -13,3 +13,6 @@ footer {
 .card {
     margin-bottom: 10px;
 }
+.delete-btn {
+    float: right;
+}

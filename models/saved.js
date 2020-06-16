@@ -8,11 +8,11 @@ var saveSchema = new Schema({
     },
     text: {
         type: String,
-        required: false
+        required: true
     },
     link: {
         type: String,
-        required: false
+        required: true
     }
 });
 

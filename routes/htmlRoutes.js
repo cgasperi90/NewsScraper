@@ -63,4 +63,10 @@ module.exports = function(app) {
         })
     });
 
+    app.get("/delete/:id", function(req, res) {
+        db.Saved.deleteOne({_id: req.params.id}, function(dbArticle) {
+            res.json(dbArticle);
+        });
+    });
+
 };
